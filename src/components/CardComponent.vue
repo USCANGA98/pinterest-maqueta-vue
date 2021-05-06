@@ -1,15 +1,9 @@
 <template>
-  <v-card
-    :href="meta.urlAddress"
-    target="_blank"
-    flat
-    ripple
-    class="rounded-xl"
-  >
-    <v-img style="border-radius: 20px" :src="url"> </v-img>
+  <v-card :href="api" target="_blank" flat ripple class="rounded-xl">
+    <v-img class="border-cut" :src="api"> </v-img>
     <v-layout align-center class="px-3 pt-3 pb-2">
       <v-avatar size="40" color="deep-purple" class="white--text">
-        <v-img :src="meta.profileImageUrl"> </v-img
+        <v-img :src="meta.profile_image"> </v-img
       ></v-avatar>
 
       <v-flex class="ml-3">
@@ -28,7 +22,7 @@ export default {
     return {};
   },
   props: {
-    url: {
+    api: {
       type: String,
       default: function () {
         return "";
@@ -44,5 +38,9 @@ export default {
 };
 </script>
 
+
 <style lang="scss" scoped>
+.border-cut {
+  border-radius: 20px;
+}
 </style>

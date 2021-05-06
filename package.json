@@ -3,11 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "start": "node server.js",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "start": "node server.js"
+    "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "install": "^0.13.0",
     "vue": "^2.6.11",

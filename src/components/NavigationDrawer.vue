@@ -94,7 +94,6 @@
       ></v-btn>
 
       <v-btn
-        plain
         large
         active-class="black white--text"
         v-for="(item, i) in items"
