@@ -12,6 +12,12 @@ const routes = [
       import(/* webpackChunkName: "about" */ "../views/Home.vue"),
   },
   {
+    path: "/imagen-api",
+    name: "ImagenVista",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/Imagen-Vista.vue"),
+  },
+  {
     path: "/hoy",
     name: "Hoy",
     // route level code-splitting
@@ -25,6 +31,12 @@ const routes = [
     name: "Siguiendo",
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/Siguiendo.vue"),
+  },
+  {
+    path: "/@luisangeluscangamacario",
+    name: "Perfil",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/Perfil.vue"),
   },
 ];
 

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="margin-top: 70px">
     <h1>Siguiendo</h1>
   </div>
 </template>

@@ -1,19 +1,12 @@
 <template>
-  <div class="ml-5 mr-5">
-    <v-text-field
-      dense
-      class="mt-8 ml-2"
-      rounded
-      clearable
-      v-model="query"
-      color="grey"
-      prepend-inner-icon="mdi-magnify"
-      @keyup.enter="buscarImagen"
-      label="Buscar"
-      filled
-    ></v-text-field>
-
-    <stack :column-min-width="210" :gutter-width="16" :gutter-height="50">
+  <div>
+    <BarraNavegacion @query="buscarImagen" />
+    <stack
+      style="margin: auto; width: 92%"
+      :column-min-width="210"
+      :gutter-width="16"
+      :gutter-height="50"
+    >
       <stack-item
         style="transition: transform 300ms"
         v-for="(item, i) in api"
@@ -24,6 +17,14 @@
           :meta="{
             name: item.user.name,
             profile_image: item.user.profile_image.medium,
+            username: item.user.username,
+            portafolio: item.user.portfolio_url,
+            alt_description: item.alt_description,
+            description: item.description,
+            link: item.user.links.html,
+            followers: item.user.links.followers,
+            likes: item.likes,
+            download: item.links.download,
           }"
         />
       </stack-item>
@@ -33,6 +34,7 @@
 
 <script>
 import CardComponent from "../components/CardComponent";
+import BarraNavegacion from "../components/BarraNavegacion";
 import axios from "axios";
 import { Stack, StackItem } from "vue-stack-grid";
 export default {
@@ -41,7 +43,7 @@ export default {
       api: "",
       urlUnsplash: "https://api.unsplash.com/search/photos/",
       accessKey: "tPCRncI1a8YnFX2sMc1SaysPZahaK6HuYkJfnc8Zk4g",
-      query: "random",
+      query: "nepal",
     };
   },
   mounted() {
@@ -60,8 +62,8 @@ export default {
         })
         .catch((e) => console.log("error", e));
     },
-    buscarImagen() {
-      let query = this.query;
+    buscarImagen($event) {
+      this.query = $event;
       axios
         .get(
           this.urlUnsplash +
@@ -73,7 +75,7 @@ export default {
           this.api = response.data.results;
         })
         .catch((e) => console.log("error", e));
-      console.log(query);
+      console.log(this.query);
       return this.getDataApi();
     },
   },
@@ -81,6 +83,7 @@ export default {
     CardComponent,
     Stack,
     StackItem,
+    BarraNavegacion,
   },
 };
 </script>

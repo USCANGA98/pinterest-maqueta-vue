@@ -1,5 +1,5 @@
 <template>
-  <v-card :href="api" target="_blank" flat ripple class="rounded-xl">
+  <v-card @click="mostrarImagen(api, meta)" target="_blank" flat ripple class="rounded-xl">
     <v-img class="border-cut" :src="api"> </v-img>
     <v-layout align-center class="px-3 pt-3 pb-2">
       <v-avatar size="40" color="deep-purple" class="white--text">
@@ -17,9 +17,11 @@
 </template>
 
 <script>
+import { mapMutations } from "vuex";
 export default {
   data: () => {
-    return {};
+    return {
+    };
   },
   props: {
     api: {
@@ -35,6 +37,14 @@ export default {
       },
     },
   },
+  methods:{
+    ...mapMutations(["setImagenVista", "setImagenData"]),
+    mostrarImagen(api, meta){
+      this.setImagenVista(api);
+      this.setImagenData(meta);
+      this.$router.push({name: 'ImagenVista'})
+    }
+  }
 };
 </script>
 

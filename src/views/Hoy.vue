@@ -1,5 +1,8 @@
 <template>
-  <div><h1>Hoy</h1></div>
+  <div>
+    <h1>Hoy</h1>
+    
+  </div>
 </template>
 
 <script>

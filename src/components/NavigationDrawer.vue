@@ -1,12 +1,6 @@
 <template>
-  <v-app>
-    <v-navigation-drawer
-      v-model="drawer"
-      :mini-variant="miniVariant"
-      :clipped="clipped"
-      fixed
-      app
-    >
+  <div>
+    <v-navigation-drawer v-model="drawer" app>
       <v-list-item>
         <v-list-item-content>
           <v-list-item-title class="title">
@@ -77,109 +71,21 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <v-app-bar
-      class="pl-3"
-      color="white"
-      elevate-on-scroll
-      fixed
-      height="80"
-      app
-    >
-      <v-btn icon
-        ><v-img
-          max-height="24"
-          max-width="24"
-          src="../assets/pinterest.png"
-        ></v-img
-      ></v-btn>
 
-      <v-btn
-        large
-        active-class="black white--text"
-        v-for="(item, i) in items"
-        :key="i"
-        :to="item.path"
-        text
-        class="black--text pa-3 text-capitalize font-weight-black rounded-xl"
-      >
-        {{ item.title }}
-      </v-btn>
-
-      <v-text-field
-        dense
-        class="mt-8 ml-2"
-        rounded
-        clearable
-        color="grey"
-        prepend-inner-icon="mdi-magnify"
-        label="Buscar"
-        filled
-      ></v-text-field>
-
-      <v-btn icon>
-        <v-icon color="grey darken-2" size="27"> mdi-bell </v-icon>
-      </v-btn>
-      <v-btn icon>
-        <v-icon color="grey darken-2" size="27"> mdi-chat-processing </v-icon>
-      </v-btn>
-      <v-btn icon>
-        <v-avatar size="24">
-          <v-img
-            src="https://yt3.ggpht.com/yti/ANoDKi5_odyECtfr2p7Xtqd0W8JirwA4weRl2ILE3u2g=s108-c-k-c0x00ffffff-no-rj"
-          ></v-img>
-        </v-avatar>
-      </v-btn>
-      <v-app-bar-nav-icon
-        color="grey darken-2"
-        @click.stop="drawer = !drawer"
-      />
-
-      <v-menu max-width="250" transition="no" bottom min-width="200" offset-x>
-        <template v-slot:activator="{ on: menu }">
-          <v-btn icon small v-on="{ ...menu }">
-            <v-icon color="grey darken-2">mdi-chevron-down</v-icon>
-          </v-btn>
-        </template>
-
-        <v-card>
-          <v-card color="blue" min-height="10" tile flat> </v-card>
-          <v-card-title>Configuracion</v-card-title>
-          <v-list-item-content class="justify-center">
-            <div class="mx-auto text-center">
-              <v-divider class="my-3"></v-divider>
-              <v-btn depressed rounded text> Cerrar Sesión </v-btn>
-            </div>
-          </v-list-item-content>
-        </v-card>
-      </v-menu>
-
-      <!-- <v-btn icon @click.stop="rightDrawer = !rightDrawer">
-        <v-icon>mdi-menu</v-icon>
-      </v-btn> -->
-    </v-app-bar>
-
-    <router-view></router-view>
-
-    <v-navigation-drawer v-model="rightDrawer" :right="right" temporary fixed>
-      <v-list>
-        <v-list-item @click.native="right = !right">
-          <v-list-item-action>
-            <v-icon light> mdi-repeat </v-icon>
-          </v-list-item-action>
-          <v-list-item-title>Switch drawer (click me)</v-list-item-title>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-  </v-app>
+    
+  </div>
 </template>
 
 <script>
 export default {
+  props: {
+    drawer: {
+      type: Boolean,
+      
+    },
+  },
   data() {
     return {
-      clipped: false,
-      drawer: false,
-      fixed: false,
       items: [
         {
           icon: "mdi-apps",
@@ -197,12 +103,13 @@ export default {
           path: "/siguiendo",
         },
       ],
-
-      miniVariant: false,
-      right: true,
-      rightDrawer: false,
-      title: "Vuetify.js",
     };
+  },
+
+  watch: {
+    drawer: function () {
+      if (!this.drawer) this.$emit("cerrar");
+    },
   },
 };
 </script>
